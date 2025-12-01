@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>A Question for You</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <div class="card">
+      <h1 class="title">Hi, Pia!</h1>
+
+      <p class="lead">Since puno na sched mo sa January, unahan ko na ang February.</p>
+
+      <div class="actions">
+        <button id="surpriseBtn" class="btn primary">Pa Sched</button>
+      </div>
+    </div>
+  </main>
+
+  <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true">
+    <div class="overlay-card">
+      <button id="closeOverlay" class="close" aria-label="Close">×</button>
+      <h2 id="proposalHeading">Will you be my Valentine?</h2>
+      <p id="proposalSub" class="muted">- Mac</p>
+
+      
+
+      <div class="proposal-actions">
+        <button id="yesBtn" class="btn yes">Yes 💖</button>
+        <button id="noBtn" class="btn no">No, thanks</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="confetti-root" class="confetti-root" aria-hidden="true"></div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
