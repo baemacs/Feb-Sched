@@ -9,7 +9,7 @@
 <body>
   <main class="container">
     <div class="card">
-      <h1 class="title">Hi, Pia!</h1>
+      <h1 class="title">Hi, darling!</h1>
 
       <p class="lead">Since puno na sched mo sa January, unahan ko na ang February.</p>
 
@@ -34,8 +34,43 @@
     </div>
   </div>
 
+  <div id="optionsOverlay" class="overlay hidden" role="dialog" aria-modal="true">
+    <div class="overlay-card wide">
+      <button id="closeOptionsOverlay" class="close" aria-label="Close">×</button>
+      <h2>Choose our date!</h2>
+      <div class="options">
+        <div class="option">
+          <img src="perfume.jpg" alt="Option 1">
+          <button class="option-btn">Create A Perfume Date</button>
+        </div>
+        <div class="option">
+          <img src="sip.jpg" alt="Option 2">
+          <button class="option-btn">Sip and Paint Date</button>
+        </div>
+        <div class="option">
+          <img src="splat.jpg" alt="Option 3">
+          <button class="option-btn">Splat Room Date</button>
+        </div>
+        <div class="option">
+          <img src="superfun.jpg" alt="Option 4">
+          <button class="option-btn">Superpark Date</button>
+        </div>
+      </div>
+      <p><i><ems>Or if may other ka pang suggestions: message mo lang yung cute mong darling!</ems></i></p>
+    </div>
+  </div>
+
+  <div id="finishOverlay" class="overlay hidden" role="dialog" aria-modal="true">
+    <div class="overlay-card">
+      <h2>See you, darling! 💕</h2>
+      <p class="muted">Your choice has been sent!</p>
+    </div>
+  </div>
+
   <div id="confetti-root" class="confetti-root" aria-hidden="true"></div>
 
+  <script src="config.js"></script>
   <script src="script.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </body>
 </html>

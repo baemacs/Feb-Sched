@@ -1,12 +1,19 @@
 // script.js — interactive behavior for the valentine page
 document.addEventListener('DOMContentLoaded',()=>{
+  // Initialize EmailJS with key from config
+  emailjs.init(CONFIG.EMAILJS_PUBLIC_KEY);
+
   const surpriseBtn = document.getElementById('surpriseBtn');
   const overlay = document.getElementById('overlay');
   const closeOverlay = document.getElementById('closeOverlay');
+  const optionsOverlay = document.getElementById('optionsOverlay');
+  const closeOptionsOverlay = document.getElementById('closeOptionsOverlay');
+  const finishOverlay = document.getElementById('finishOverlay');
   const yesBtn = document.getElementById('yesBtn');
   const noBtn = document.getElementById('noBtn');
   const proposalHeading = document.getElementById('proposalHeading');
   const confettiRoot = document.getElementById('confetti-root');
+  const noArray = ['No, Thanks!', 'Ayaw mo talaga? :(((','Pleaseee T_T', 'Libre kita Burger Steak!', ':(', 'pighati T_T']
 
   function showOverlay(){
     overlay.classList.remove('hidden');
@@ -17,20 +24,39 @@ document.addEventListener('DOMContentLoaded',()=>{
     overlay.classList.add('hidden');
   }
 
+  function closeOptions(){
+    optionsOverlay.classList.add('hidden');
+  }
+
+  function closeFinish(){
+    finishOverlay.classList.add('hidden');
+  }
+
   surpriseBtn.addEventListener('click',showOverlay);
   closeOverlay.addEventListener('click',close);
+  closeOptionsOverlay.addEventListener('click',closeOptions);
 
   // close on escape
   document.addEventListener('keydown',(e)=>{
-    if(e.key==='Escape') close();
+    if(e.key==='Escape') {
+      if(!finishOverlay.classList.contains('hidden')) {
+        closeFinish();
+      } else if(!optionsOverlay.classList.contains('hidden')) {
+        closeOptions();
+      } else if(!overlay.classList.contains('hidden')) {
+        close();
+      }
+    }
   });
 
   yesBtn.addEventListener('click',()=>{
-    proposalHeading.textContent = 'She said yes! ✨';
+    proposalHeading.textContent = 'Yehey! ✨';
+    document.querySelector('.proposal-actions').style.display = 'none';
     runConfetti();
-    // show sweet message
+    // show options overlay after confetti
     setTimeout(()=>{
-      proposalHeading.textContent = 'G, hehehe!';
+      close();
+      optionsOverlay.classList.remove('hidden');
     },1400);
   });
 
@@ -41,6 +67,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     noBtn.style.position = 'fixed';
     noBtn.style.left = randomX + 'px';
     noBtn.style.top = randomY + 'px';
+    noBtn.textContent = noArray[Math.floor(Math.random() * noArray.length)];
   });
 
   // simple confetti — creates small colored rectangles that fall
@@ -69,4 +96,30 @@ document.addEventListener('DOMContentLoaded',()=>{
       setTimeout(()=>{ try{ el.remove(); }catch(e){} }, duration+400);
     }
   }
+
+  // Option button clicks
+  document.querySelectorAll('.option-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const chosenOption = btn.textContent;
+      
+      // Send email with chosen option
+      emailjs.send(CONFIG.EMAILJS_SERVICE_ID, CONFIG.EMAILJS_TEMPLATE_ID, {
+        from_name: 'Valentine App',
+        message: `Pia chose: ${chosenOption}`
+      })
+      .then((response) => {
+        console.log('Email sent successfully:', response);
+        closeOptions();
+        finishOverlay.classList.remove('hidden');
+      })
+      .catch((error) => {
+        console.error('Email failed:', error);
+        closeOptions();
+        finishOverlay.classList.remove('hidden');
+      });
+    });
+  });
+
+  // Close finish overlay on click
+  finishOverlay.addEventListener('click', closeFinish);
 });

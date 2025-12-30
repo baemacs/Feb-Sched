@@ -20,11 +20,12 @@ body{
 }
 .container{width:100%;max-width:760px}
 .card{
-  background:var(--card);
+  background:linear-gradient(white, white) padding-box, linear-gradient(45deg, #ff9ccf, #ffd166, #8bd3ff) border-box;
   border-radius:14px;
   padding:28px;
   box-shadow:var(--shadow);
   text-align:center;
+  border:2px solid transparent;
 }
 .title{margin:0 0 8px;font-size:1.5rem}
 .lead{margin:0 0 18px;color:var(--muted)}
@@ -40,18 +41,38 @@ input{padding:10px 12px;border:1px solid #eee;border-radius:8px;min-width:180px;
 /* Overlay */
 .overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,6,10,0.35);backdrop-filter:blur(3px);z-index:60}
 .overlay.hidden{display:none}
-.overlay-card{background:white;padding:22px;border-radius:12px;max-width:420px;text-align:center;box-shadow:var(--shadow);position:relative}
+.hidden{display:none}
+.overlay-card{background:white;padding:22px;border-radius:12px;max-width:420px;text-align:center;box-shadow:var(--shadow);position:relative;border:2px solid transparent;background:linear-gradient(white, white) padding-box, linear-gradient(45deg, #ff9ccf, #ffd166, #8bd3ff) border-box;}
+.overlay-card.wide{max-width:none;width:90vw;max-height:90vh;overflow-y:auto}
 .close{position:absolute;right:10px;top:8px;background:none;border:none;font-size:22px;cursor:pointer}
 .proposal-actions{display:flex;gap:10px;justify-content:center;margin-top:18px}
 .btn.yes{background:linear-gradient(180deg,#ff9ccf,#ff6aa6);color:white}
 .btn.no{background:#f1f1f1;color:#333}
 .muted{color:var(--muted);margin-top:6px}
 
+/* Options */
+.options{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-top:20px}
+.option{display:flex;flex-direction:column;align-items:center;gap:10px}
+.option img{max-width:100%;height:auto;border-radius:8px;max-height:200px}
+.option-btn{padding:8px 12px;border-radius:8px;border:none;background:var(--accent);color:white;cursor:pointer;font-weight:600}
+
 /* confetti */
 .confetti-root{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:70}
 .confetti-piece{position:absolute;width:10px;height:14px;opacity:0.95;border-radius:2px;transform-origin:center}
 
 @media (max-width:480px){
-  .form-row{flex-direction:column}
-  input{min-width:unset;width:100%}
+  body{padding:16px}
+  .container{max-width:100%}
+  .card{padding:20px}
+  .title{font-size:1.2rem}
+  .lead{font-size:0.9rem;margin-bottom:16px}
+  .overlay-card{max-width:90%;padding:16px}
+  .overlay-card.wide{max-width:95%}
+  .proposal-actions{flex-direction:column;gap:8px}
+  .btn.yes,.btn.no{padding:8px 14px;font-size:0.9rem}
+  .options{grid-template-columns:1fr;gap:12px;margin-top:16px}
+  .option{gap:8px}
+  .option img{max-height:150px}
+  .option-btn{padding:6px 10px;font-size:0.85rem}
+  .close{font-size:18px}
 }
