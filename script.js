@@ -1,7 +1,7 @@
 // script.js — interactive behavior for the valentine page
 document.addEventListener('DOMContentLoaded',()=>{
-  // Initialize EmailJS with key from config
-  emailjs.init(CONFIG.EMAILJS_PUBLIC_KEY);
+  // Initialize EmailJS with environment variables
+  emailjs.init(process.env.EMAILJS_PUBLIC_KEY);
 
   const surpriseBtn = document.getElementById('surpriseBtn');
   const overlay = document.getElementById('overlay');
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       const chosenOption = btn.textContent;
       
       // Send email with chosen option
-      emailjs.send(CONFIG.EMAILJS_SERVICE_ID, CONFIG.EMAILJS_TEMPLATE_ID, {
+      emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_ID, {
         from_name: 'Valentine App',
         message: `Pia chose: ${chosenOption}`
       })
